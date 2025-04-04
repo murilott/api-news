@@ -1,6 +1,12 @@
 import express from 'express'
+import userRoute from "./src/routes/user.route.js"
 
 const app = express()
+
+app.use("/soma", userRoute);
+
+app.listen(3000);
+
 
 // Método HTTP - CRUD
     // GET - pega uma info
@@ -11,14 +17,12 @@ const app = express()
 // Nome - um identificador da rota
 // Função (Callback) - responsável por executar algum comando
 
-app.get('/soma', (req, res) => {
-    const soma = 2 + 2;
+// app.get('/soma', (req, res) => {
+//     const soma = 2 + 2;
 
-  res.send({soma: soma})
-})
+//     res.send({soma: soma})
+// })
 
-app.get('/home', (req, res) => {
-  res.send('Bem vindo')
-})
-
-app.listen(3000)
+// app.get('/home', (req, res) => {
+//   res.send('Bem vindo')
+// })

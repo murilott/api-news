@@ -1,5 +1,5 @@
 const userService = require("../services/user.service.js");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 // const soma = (req, res) => {
 //     const soma = 2 + 8;
@@ -51,17 +51,7 @@ const findAll = async (req, res) => {
 }
 
 const findById = async (req, res) => {
-    const id = req.params.id;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).send({ message: "Usuário não encontrdao"});
-    }
-
-    const user = await userService.findById(id);
-
-    if (!user) {
-        return res.status(400).send({ message: "Usuário não encontrdao"});
-    }
+    const user = req.user;
 
     res.send(user);
 }
@@ -74,17 +64,7 @@ const update = async (req, res) => {
             message: "Preencha pelo menos um campo para atualizar"});
         }
         
-    const id = req.params.id;
-    
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).send({ message: "Usuário não encontrdao"});
-    }
-
-    const user = await userService.findById(id);
-
-    if (!user) {
-        return res.status(400).send({ message: "Usuário não encontrdao"});
-    }
+    const {id, user} = req;
 
     await userService.update(
         id,
